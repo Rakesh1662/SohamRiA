@@ -8,6 +8,23 @@ int r;
 int p = LOW;    
 long time = 0;       
 long debounce = 200;
+byte buzzer = 9 ;
+int delay_time = 500;
+byte aCount ,bCount ,cCount  =0; 
+
+void buzz(){
+    digitalWrite(buzzer,HIGH);
+    delay(delay_time);
+    digitalWrite(buzzer,LOW);
+    delay(20);
+    digitalWrite(buzzer,HIGH);
+    delay(delay_time);
+    digitalWrite(buzzer,LOW);
+    delay(20);
+    digitalWrite(buzzer,HIGH);
+    delay(delay_time);
+    digitalWrite(buzzer,LOW);
+}
 void setup()
 {
   pinMode(4, INPUT);
@@ -15,6 +32,7 @@ void setup()
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT); 
+  pinMode(buzzer,OUTPUT);
 }
 void loop()                    
 {
@@ -31,21 +49,36 @@ void loop()
     digitalWrite(6, LOW);
     digitalWrite(7, LOW);
     Serial.print(cnt);
+    while(aCount < 1){
+      buzz();
+      aCount++;
+    }
   }
   if(cnt == 2){
     digitalWrite(5, LOW);
     digitalWrite(6, HIGH);
     digitalWrite(7, LOW);
     Serial.print(cnt);
+    while(bCount < 1){
+      buzz();
+      bCount++;
+    }
   }
   if(cnt == 3){
     digitalWrite(5, LOW);
     digitalWrite(6, LOW);
     digitalWrite(7, HIGH);
     Serial.print(cnt);
+    while(cCount < 1){
+      buzz();
+      cCount++;
+    }
   }
   if(cnt > 3){
       cnt = 0;
+      aCount = 0 ;
+      bCount = 0 ;
+      cCount = 0 ;
   }
   p = r;
   Serial.print(r);
